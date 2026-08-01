@@ -8,6 +8,12 @@ import Testing
 
 @Suite
 struct `Orthant+Finite.Enumerable - Enumerable` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant+Finite.Enumerable - Enumerable`.Unit {
     @Test
     func `count is 2^N`() {
         #expect(Orthant<1>.count == 2)
@@ -29,13 +35,21 @@ struct `Orthant+Finite.Enumerable - Enumerable` {
 
 @Suite
 struct `Orthant+Finite.Enumerable - AllCases` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant+Finite.Enumerable - AllCases`.Unit {
     @Test
     func `allCases has 2^N elements`() {
         #expect(Array(Orthant<1>.allCases).count == 2)
         #expect(Array(Orthant<2>.allCases).count == 4)
         #expect(Array(Orthant<3>.allCases).count == 8)
     }
+}
 
+extension `Orthant+Finite.Enumerable - AllCases`.Integration {
     @Test
     func `allCases round-trips through ordinal`() {
         for orthant in Orthant<3>.allCases {

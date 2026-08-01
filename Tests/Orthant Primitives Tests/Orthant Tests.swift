@@ -7,6 +7,12 @@ import Testing
 
 @Suite
 struct `Orthant - Construction` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant - Construction`.Unit {
     @Test
     func `repeating sets every axis`() {
         let orthant = Orthant<3>(repeating: .positive)
@@ -28,6 +34,12 @@ struct `Orthant - Construction` {
 
 @Suite
 struct `Orthant - Opposite` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant - Opposite`.Unit {
     @Test
     func `opposite flips every axis`() {
         let orthant = Orthant<3> { index in index == 0 ? .positive : .negative }
@@ -36,7 +48,9 @@ struct `Orthant - Opposite` {
         #expect(antipode.directions[1] == .positive)
         #expect(antipode.directions[2] == .positive)
     }
+}
 
+extension `Orthant - Opposite`.`Edge Case` {
     @Test
     func `opposite is involution`() {
         let orthant = Orthant<2> { index in index == 0 ? .positive : .negative }
@@ -48,6 +62,12 @@ struct `Orthant - Opposite` {
 
 @Suite
 struct `Orthant - Conformances` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant - Conformances`.Unit {
     @Test
     func `Equatable is element-wise`() {
         #expect(Orthant<2>(repeating: .positive) == Orthant<2>(repeating: .positive))
@@ -75,6 +95,12 @@ struct `Orthant - Conformances` {
 
 @Suite
 struct `Orthant - Comparison` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Orthant - Comparison`.Unit {
     @Test
     func `lexicographic order, axis 0 most significant`() {
         let mm = Orthant<2>(repeating: .negative)  // (−, −)
