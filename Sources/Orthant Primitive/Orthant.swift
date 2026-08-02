@@ -99,7 +99,7 @@ extension Orthant {
     /// Feeds each axis direction's sign into the hasher, axis 0 first.
     @inlinable
     public func hash(into hasher: inout Hasher) {
-        for index in 0..<N { hasher.combine(directions[index].sign) }
+        (0..<N).forEach { index in hasher.combine(directions[index].sign) }
     }
 }
 
