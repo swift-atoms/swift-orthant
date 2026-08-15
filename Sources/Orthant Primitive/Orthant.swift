@@ -107,10 +107,8 @@ extension Orthant {
 
 // The `Codable` conformance below realizes the stdlib `Decodable`/`Encodable`
 // requirements, whose signatures mandate existential coder parameters and untyped
-// `throws`. Neither can be narrowed at the conformance site, so the two rules are
-// disabled for this block only. The conformance is excluded from Embedded Swift,
-// which does not ship the `Codable` runtime infrastructure.
-// swiftlint:disable no_any_protocol_existential typed_throws_required
+// `throws`. The conformance is excluded from Embedded Swift, which does not ship
+// the `Codable` runtime infrastructure.
 #if !hasFeature(Embedded)
     extension Orthant: Codable {
         /// Decodes an orthant from an unkeyed sequence of `N` per-axis directions.
@@ -128,4 +126,3 @@ extension Orthant {
         }
     }
 #endif
-// swiftlint:enable no_any_protocol_existential typed_throws_required
