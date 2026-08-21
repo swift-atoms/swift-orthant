@@ -11,13 +11,12 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Namespace
+
         .library(
             name: "Orthant Primitive",
             targets: ["Orthant Primitive"]
         ),
 
-        // MARK: - Sub-namespace targets
         .library(
             name: "Orthant Equation Primitives",
             targets: ["Orthant Equation Primitives"]
@@ -35,13 +34,11 @@ let package = Package(
             targets: ["Orthant Enumerable Primitives"]
         ),
 
-        // MARK: - Umbrella
         .library(
             name: "Orthant Primitives",
             targets: ["Orthant Primitives"]
         ),
 
-        // MARK: - Test Support
         .library(
             name: "Orthant Primitives Test Support",
             targets: ["Orthant Primitives Test Support"]
@@ -74,10 +71,7 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace
-        // Orthant's storage is InlineArray<N, Direction>, so the root depends on the
-        // Direction atom root only (the [MOD-017] cross-namespace-root exception); it is
-        // axis-free by design (indexed by axis ordinal 0..<N).
+
         .target(
             name: "Orthant Primitive",
             dependencies: [
@@ -85,8 +79,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Sub-namespace targets (per [MOD-031])
-        // Institute Equatable/Hashable/Comparable twins:
         .target(
             name: "Orthant Equation Primitives",
             dependencies: [
@@ -108,7 +100,7 @@ let package = Package(
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
             ]
         ),
-        // Finite.Enumerable conformance (2^N inhabitants enumeration):
+
         .target(
             name: "Orthant Enumerable Primitives",
             dependencies: [
@@ -119,7 +111,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Orthant Primitives",
             dependencies: [
@@ -131,7 +122,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Orthant Primitives Test Support",
             dependencies: [
@@ -144,7 +134,6 @@ let package = Package(
             path: "Tests/Support"
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Orthant Primitives Tests",
             dependencies: [

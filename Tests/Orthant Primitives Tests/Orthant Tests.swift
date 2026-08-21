@@ -1,9 +1,5 @@
-// Orthant Tests.swift
-
 import Orthant_Primitives
 import Testing
-
-// MARK: - Orthant - Construction
 
 @Suite
 struct `Orthant - Construction` {
@@ -29,8 +25,6 @@ extension `Orthant - Construction`.Unit {
         #expect(orthant.directions[2] == .positive)
     }
 }
-
-// MARK: - Orthant - Opposite
 
 @Suite
 struct `Orthant - Opposite` {
@@ -58,8 +52,6 @@ extension `Orthant - Opposite`.`Edge Case` {
     }
 }
 
-// MARK: - Orthant - Conformances
-
 @Suite
 struct `Orthant - Conformances` {
     @Suite struct Unit {}
@@ -85,13 +77,11 @@ extension `Orthant - Conformances`.Unit {
             Orthant<2> { $0 == 0 ? .positive : .negative },
             Orthant<2> { $0 == 0 ? .negative : .positive },
             Orthant<2>(repeating: .negative),
-            Orthant<2>(repeating: .positive),  // duplicate
+            Orthant<2>(repeating: .positive),
         ]
         #expect(set.count == 4)
     }
 }
-
-// MARK: - Orthant - Comparison
 
 @Suite
 struct `Orthant - Comparison` {
@@ -103,9 +93,9 @@ struct `Orthant - Comparison` {
 extension `Orthant - Comparison`.Unit {
     @Test
     func `lexicographic order, axis 0 most significant`() {
-        let mm = Orthant<2>(repeating: .negative)  // (−, −)
-        let mp = Orthant<2> { $0 == 0 ? .negative : .positive }  // (−, +)
-        let pm = Orthant<2> { $0 == 0 ? .positive : .negative }  // (+, −)
+        let mm = Orthant<2>(repeating: .negative)
+        let mp = Orthant<2> { $0 == 0 ? .negative : .positive }
+        let pm = Orthant<2> { $0 == 0 ? .positive : .negative }
         #expect(mm < mp)
         #expect(mp < pm)
         #expect(mm < pm)

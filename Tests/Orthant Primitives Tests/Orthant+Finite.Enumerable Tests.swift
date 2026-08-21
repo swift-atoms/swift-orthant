@@ -1,10 +1,6 @@
-// Orthant+Finite.Enumerable Tests.swift
-
 import Orthant_Primitives
 import Orthant_Primitives_Test_Support
 import Testing
-
-// MARK: - Orthant+Finite.Enumerable - Enumerable
 
 @Suite
 struct `Orthant+Finite.Enumerable - Enumerable` {
@@ -25,13 +21,11 @@ extension `Orthant+Finite.Enumerable - Enumerable`.Unit {
     @Test
     func `ordinal bit-encodes negative axes`() {
         #expect(Orthant<3>(repeating: .positive).ordinal == 0)
-        #expect(Orthant<3>(repeating: .negative).ordinal == 7)  // 0b111
-        #expect(Orthant<3> { $0 == 0 ? .negative : .positive }.ordinal == 1)  // bit 0
-        #expect(Orthant<3> { $0 == 2 ? .negative : .positive }.ordinal == 4)  // bit 2
+        #expect(Orthant<3>(repeating: .negative).ordinal == 7)
+        #expect(Orthant<3> { $0 == 0 ? .negative : .positive }.ordinal == 1)
+        #expect(Orthant<3> { $0 == 2 ? .negative : .positive }.ordinal == 4)
     }
 }
-
-// MARK: - Orthant+Finite.Enumerable - AllCases
 
 @Suite
 struct `Orthant+Finite.Enumerable - AllCases` {
