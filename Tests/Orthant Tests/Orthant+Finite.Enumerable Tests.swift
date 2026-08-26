@@ -1,5 +1,5 @@
-import Orthant_Primitives
-import Orthant_Primitives_Test_Support
+import Orthant
+import Orthant_Test_Support
 import Testing
 
 @Suite

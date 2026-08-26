@@ -1,2 +1,0 @@
-@_exported public import Ordinal_Primitives_Test_Support
-internal import Orthant_Primitives

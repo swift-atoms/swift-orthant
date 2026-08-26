@@ -1,6 +1,6 @@
 import Direction_Primitive
-import Finite_Primitives
-import Ordinal_Primitives
+import Finite
+import Ordinal
 import Orthant_Primitive
 
 extension Orthant: Finite.Enumerable {

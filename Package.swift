@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-orthant-primitives",
+    name: "swift-orthant",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -18,55 +18,55 @@ let package = Package(
         ),
 
         .library(
-            name: "Orthant Equation Primitives",
-            targets: ["Orthant Equation Primitives"]
+            name: "Orthant Equation",
+            targets: ["Orthant Equation"]
         ),
         .library(
-            name: "Orthant Hash Primitives",
-            targets: ["Orthant Hash Primitives"]
+            name: "Orthant Hash",
+            targets: ["Orthant Hash"]
         ),
         .library(
-            name: "Orthant Comparison Primitives",
-            targets: ["Orthant Comparison Primitives"]
+            name: "Orthant Comparison",
+            targets: ["Orthant Comparison"]
         ),
         .library(
-            name: "Orthant Enumerable Primitives",
-            targets: ["Orthant Enumerable Primitives"]
-        ),
-
-        .library(
-            name: "Orthant Primitives",
-            targets: ["Orthant Primitives"]
+            name: "Orthant Enumerable",
+            targets: ["Orthant Enumerable"]
         ),
 
         .library(
-            name: "Orthant Primitives Test Support",
-            targets: ["Orthant Primitives Test Support"]
+            name: "Orthant",
+            targets: ["Orthant"]
+        ),
+
+        .library(
+            name: "Orthant Test Support",
+            targets: ["Orthant Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-direction-primitives.git",
+            url: "https://github.com/swift-molecules/swift-direction.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-equation-primitives.git",
+            url: "https://github.com/swift-molecules/swift-equation.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-hash-primitives.git",
+            url: "https://github.com/swift-molecules/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-comparison-primitives.git",
+            url: "https://github.com/swift-molecules/swift-comparison.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-finite-primitives.git",
+            url: "https://github.com/swift-molecules/swift-finite.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ordinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-ordinal.git",
             branch: "main"
         ),
     ],
@@ -75,70 +75,70 @@ let package = Package(
         .target(
             name: "Orthant Primitive",
             dependencies: [
-                .product(name: "Direction Primitive", package: "swift-direction-primitives")
+                .product(name: "Direction Primitive", package: "swift-direction")
             ]
         ),
 
         .target(
-            name: "Orthant Equation Primitives",
+            name: "Orthant Equation",
             dependencies: [
                 "Orthant Primitive",
-                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
+                .product(name: "Equation", package: "swift-equation"),
             ]
         ),
         .target(
-            name: "Orthant Hash Primitives",
+            name: "Orthant Hash",
             dependencies: [
                 "Orthant Primitive",
-                .product(name: "Hash Primitives", package: "swift-hash-primitives"),
+                .product(name: "Hash", package: "swift-hash"),
             ]
         ),
         .target(
-            name: "Orthant Comparison Primitives",
+            name: "Orthant Comparison",
             dependencies: [
                 "Orthant Primitive",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Orthant Enumerable Primitives",
-            dependencies: [
-                "Orthant Primitive",
-                .product(name: "Direction Primitive", package: "swift-direction-primitives"),
-                .product(name: "Finite Primitives", package: "swift-finite-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
+                .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
 
         .target(
-            name: "Orthant Primitives",
+            name: "Orthant Enumerable",
             dependencies: [
                 "Orthant Primitive",
-                "Orthant Equation Primitives",
-                "Orthant Hash Primitives",
-                "Orthant Comparison Primitives",
-                "Orthant Enumerable Primitives",
+                .product(name: "Direction Primitive", package: "swift-direction"),
+                .product(name: "Finite", package: "swift-finite"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
         .target(
-            name: "Orthant Primitives Test Support",
+            name: "Orthant",
             dependencies: [
-                "Orthant Primitives",
+                "Orthant Primitive",
+                "Orthant Equation",
+                "Orthant Hash",
+                "Orthant Comparison",
+                "Orthant Enumerable",
+            ]
+        ),
+
+        .target(
+            name: "Orthant Test Support",
+            dependencies: [
+                "Orthant",
                 .product(
-                    name: "Ordinal Primitives Test Support",
-                    package: "swift-ordinal-primitives"
+                    name: "Ordinal Test Support",
+                    package: "swift-ordinal"
                 ),
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Orthant Primitives Tests",
+            name: "Orthant Tests",
             dependencies: [
-                "Orthant Primitives",
-                "Orthant Primitives Test Support",
+                "Orthant",
+                "Orthant Test Support",
             ]
         ),
     ],
