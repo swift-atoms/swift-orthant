@@ -57,7 +57,10 @@ let package = Package(
         ),
         .testTarget(
             name: "Orthant Tests",
-            dependencies: ["Orthant"]
+            dependencies: [
+                "Orthant",
+                .product(name: "Direction", package: "swift-direction"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

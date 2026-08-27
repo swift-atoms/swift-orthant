@@ -1,6 +1,6 @@
 public import Direction
 
-public struct Orthant<let N: Int>: Sendable {
+public struct Orthant<let N: Int>: Sendable, Hashable, Comparable {
 
     public let directions: InlineArray<N, Direction>
 

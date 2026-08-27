@@ -1,3 +1,4 @@
+import Direction
 import Orthant
 import Testing
 
