@@ -13,11 +13,6 @@ let package = Package(
     products: [
 
         .library(
-            name: "Orthant Primitive",
-            targets: ["Orthant Primitive"]
-        ),
-
-        .library(
             name: "Orthant Equation",
             targets: ["Orthant Equation"]
         ),
@@ -46,57 +41,57 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-direction.git",
+            url: "https://github.com/swift-atoms/swift-direction.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-equation.git",
+            url: "https://github.com/swift-atoms/swift-equation.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-hash.git",
+            url: "https://github.com/swift-atoms/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-comparison.git",
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-finite.git",
+            url: "https://github.com/swift-atoms/swift-finite.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ordinal.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Orthant Primitive",
+            name: "Orthant",
             dependencies: [
-                .product(name: "Direction Primitive", package: "swift-direction")
+                .product(name: "Direction", package: "swift-direction")
             ]
         ),
 
         .target(
             name: "Orthant Equation",
             dependencies: [
-                "Orthant Primitive",
+                .target(name: "Orthant"),
                 .product(name: "Equation", package: "swift-equation"),
             ]
         ),
         .target(
             name: "Orthant Hash",
             dependencies: [
-                "Orthant Primitive",
+                .target(name: "Orthant"),
                 .product(name: "Hash", package: "swift-hash"),
             ]
         ),
         .target(
             name: "Orthant Comparison",
             dependencies: [
-                "Orthant Primitive",
+                .target(name: "Orthant"),
                 .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
@@ -104,28 +99,17 @@ let package = Package(
         .target(
             name: "Orthant Enumerable",
             dependencies: [
-                "Orthant Primitive",
-                .product(name: "Direction Primitive", package: "swift-direction"),
+                .target(name: "Orthant"),
+                .product(name: "Direction", package: "swift-direction"),
                 .product(name: "Finite", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
         .target(
-            name: "Orthant",
-            dependencies: [
-                "Orthant Primitive",
-                "Orthant Equation",
-                "Orthant Hash",
-                "Orthant Comparison",
-                "Orthant Enumerable",
-            ]
-        ),
-
-        .target(
             name: "Orthant Test Support",
             dependencies: [
-                "Orthant",
+                .target(name: "Orthant"),
                 .product(
                     name: "Ordinal Test Support",
                     package: "swift-ordinal"
@@ -137,8 +121,8 @@ let package = Package(
         .testTarget(
             name: "Orthant Tests",
             dependencies: [
-                "Orthant",
-                "Orthant Test Support",
+                .target(name: "Orthant"),
+                .target(name: "Orthant Test Support"),
             ]
         ),
     ],

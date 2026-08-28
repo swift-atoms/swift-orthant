@@ -1,4 +1,4 @@
 public import Equation
-public import Orthant_Primitive
+public import Orthant
 
 extension Orthant: Equation.`Protocol` {}

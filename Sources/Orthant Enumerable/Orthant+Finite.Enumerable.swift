@@ -1,7 +1,7 @@
-import Direction_Primitive
+import Direction
 import Finite
 import Ordinal
-import Orthant_Primitive
+import Orthant
 
 extension Orthant: Finite.Enumerable {
 

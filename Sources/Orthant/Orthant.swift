@@ -1,4 +1,4 @@
-import Direction_Primitive
+import Direction
 
 public struct Orthant<let N: Int>: Sendable {
 

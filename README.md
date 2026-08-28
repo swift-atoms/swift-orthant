@@ -1,4 +1,4 @@
-# Orthant
+# Orthant Primitives
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -48,7 +48,7 @@ Equality, hashing, and ordering are provided through the institute conformance t
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-orthant.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-orthant.git", branch: "main")
 ]
 ```
 
@@ -67,16 +67,16 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-The `Orthant` root namespace depends only on the `Direction` atom; the conformance twins each add one institute protocol. Import the `Orthant` umbrella for the full surface, or a single sub-target for a narrower dependency.
+The `Orthant` root namespace depends only on the `Direction` atom; the conformance twins each add one institute protocol. Import the `Orthant Primitives` umbrella for the full surface, or a single sub-target for a narrower dependency.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
 | `Orthant Primitive` | `Sources/Orthant Primitive/` | The `Orthant<N>` value type: per-axis `Direction` storage, `opposite`, the `==` / `<` / `hash(into:)` witnesses, and `Codable`. |
-| `Orthant Equation` | `Sources/Orthant Equation/` | `Equation.Protocol` conformance (the institute `Equatable` twin). |
-| `Orthant Hash` | `Sources/Orthant Hash/` | `Hash.Protocol` conformance (the institute `Hashable` twin). |
-| `Orthant Comparison` | `Sources/Orthant Comparison/` | `Comparison.Protocol` conformance (the institute `Comparable` twin). |
-| `Orthant Enumerable` | `Sources/Orthant Enumerable/` | `Finite.Enumerable` conformance: `count` (`2ᴺ`), `ordinal`, and `allCases`. |
-| `Orthant` | `Sources/Orthant/` | Umbrella re-exporting all of the above. |
+| `Orthant Equation Primitives` | `Sources/Orthant Equation Primitives/` | `Equation.Protocol` conformance (the institute `Equatable` twin). |
+| `Orthant Hash Primitives` | `Sources/Orthant Hash Primitives/` | `Hash.Protocol` conformance (the institute `Hashable` twin). |
+| `Orthant Comparison Primitives` | `Sources/Orthant Comparison Primitives/` | `Comparison.Protocol` conformance (the institute `Comparable` twin). |
+| `Orthant Enumerable Primitives` | `Sources/Orthant Enumerable Primitives/` | `Finite.Enumerable` conformance: `count` (`2ᴺ`), `ordinal`, and `allCases`. |
+| `Orthant Primitives` | `Sources/Orthant Primitives/` | Umbrella re-exporting all of the above. |
 | `Orthant Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
 
 Foundation-free.

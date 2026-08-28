@@ -1,4 +1,4 @@
 public import Comparison
-public import Orthant_Primitive
+public import Orthant
 
 extension Orthant: Comparison.`Protocol` {}

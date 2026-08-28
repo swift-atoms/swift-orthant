@@ -1,4 +1,4 @@
 public import Hash
-public import Orthant_Primitive
+public import Orthant
 
 extension Orthant: Hash.`Protocol` {}
