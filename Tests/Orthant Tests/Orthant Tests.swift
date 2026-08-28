@@ -1,4 +1,4 @@
-import Orthant_Primitives
+import Orthant
 import Testing
 
 @Suite

@@ -11,7 +11,7 @@ An N-dimensional orthant for Swift — a per-axis `Direction` vector naming the 
 `Orthant<N>` assigns a `Direction` to every one of the `N` axes. It is the N-dimensional generalization of a quadrant (2D, 4 inhabitants) and an octant (3D, 8 inhabitants): where a single `Facet` fixes a sign on exactly one axis, an orthant fixes a sign on *every* axis, giving `2ᴺ` inhabitants. The per-axis choices are stored in an `InlineArray<N, Direction>` indexed by axis ordinal `0..<N`.
 
 ```swift
-import Orthant_Primitives
+import Orthant
 
 // A quadrant of the 2D plane is a sign choice on each of the two axes.
 let quadrant = Orthant<2> { axis in axis == 0 ? .positive : .negative }   // (+x, −y)
@@ -28,7 +28,7 @@ for octant in Orthant<3>.allCases {
 The `ordinal` packs the sign choices into a bit pattern — axis `i` contributes bit `i`, set when its direction is negative — and round-trips back through `Orthant<N>(_unchecked:ordinal:)`:
 
 ```swift
-import Orthant_Primitives
+import Orthant
 
 let octant = Orthant<3>(repeating: .negative)
 octant.ordinal                                        // 7 — 0b111, all axes negative
@@ -48,7 +48,7 @@ Equality, hashing, and ordering are provided through the institute conformance t
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-orthant-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-orthant.git", branch: "main")
 ]
 ```
 
@@ -56,7 +56,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Orthant Primitives", package: "swift-orthant-primitives"),
+        .product(name: "Orthant", package: "swift-orthant"),
     ]
 )
 ```
@@ -77,7 +77,7 @@ The `Orthant` root namespace depends only on the `Direction` atom; the conforman
 | `Orthant Comparison Primitives` | `Sources/Orthant Comparison Primitives/` | `Comparison.Protocol` conformance (the institute `Comparable` twin). |
 | `Orthant Enumerable Primitives` | `Sources/Orthant Enumerable Primitives/` | `Finite.Enumerable` conformance: `count` (`2ᴺ`), `ordinal`, and `allCases`. |
 | `Orthant Primitives` | `Sources/Orthant Primitives/` | Umbrella re-exporting all of the above. |
-| `Orthant Primitives Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
+| `Orthant Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
 
 Foundation-free.
 
