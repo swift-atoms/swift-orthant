@@ -1,6 +1,6 @@
-public import Direction
+import Direction_Primitive
 
-public struct Orthant<let N: Int>: Sendable, Hashable, Comparable {
+public struct Orthant<let N: Int>: Sendable {
 
     public let directions: InlineArray<N, Direction>
 
@@ -61,3 +61,20 @@ extension Orthant {
         (0..<N).forEach { index in hasher.combine(directions[index].sign) }
     }
 }
+
+#if !hasFeature(Embedded)
+    extension Orthant: Codable {
+
+        @inlinable
+        public init(from decoder: any Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            self.init(try InlineArray<N, Direction> { _ in try container.decode(Direction.self) })
+        }
+
+        @inlinable
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            for index in 0..<N { try container.encode(directions[index]) }
+        }
+    }
+#endif

@@ -8,30 +8,39 @@ An N-dimensional orthant for Swift — a per-axis `Direction` vector naming the 
 
 ## Quick Start
 
-`Orthant<N>` assigns a `Direction` to every one of the `N` axes. It is the N-dimensional generalization of a quadrant (2D, 4 inhabitants) and an octant (3D, 8 inhabitants). The per-axis choices are stored in an `InlineArray<N, Direction>` indexed by `0..<N`.
+`Orthant<N>` assigns a `Direction` to every one of the `N` axes. It is the N-dimensional generalization of a quadrant (2D, 4 inhabitants) and an octant (3D, 8 inhabitants): where a single `Facet` fixes a sign on exactly one axis, an orthant fixes a sign on *every* axis, giving `2ᴺ` inhabitants. The per-axis choices are stored in an `InlineArray<N, Direction>` indexed by axis ordinal `0..<N`.
 
 ```swift
-import Direction
 import Orthant
 
 // A quadrant of the 2D plane is a sign choice on each of the two axes.
 let quadrant = Orthant<2> { axis in axis == 0 ? .positive : .negative }   // (+x, −y)
 quadrant.directions[0]   // .positive
 quadrant.opposite        // (−x, +y) — every axis flipped
+
+// The 2ᴺ inhabitants enumerate in a stable order; each carries an ordinal in 0..<2ᴺ.
+Orthant<3>.count                  // 8 — the eight octants of 3-space
+for octant in Orthant<3>.allCases {
+    print(octant.ordinal)         // 0, 1, 2, … 7
+}
 ```
 
-Orthants compare lexicographically, with axis 0 most significant:
+The `ordinal` packs the sign choices into a bit pattern — axis `i` contributes bit `i`, set when its direction is negative — and round-trips back through `Orthant<N>(_unchecked:ordinal:)`:
 
 ```swift
-import Direction
 import Orthant
 
+let octant = Orthant<3>(repeating: .negative)
+octant.ordinal                                        // 7 — 0b111, all axes negative
+Orthant<3>(_unchecked: (), ordinal: octant.ordinal)   // == octant
+
+// Orthants order lexicographically, axis 0 most significant.
 let mm = Orthant<2>(repeating: .negative)                 // (−, −)
 let pm = Orthant<2> { $0 == 0 ? .positive : .negative }   // (+, −)
 mm < pm                                                   // true
 ```
 
-`Orthant` conforms directly to `Equatable`, `Hashable`, and `Comparable`.
+Equality, hashing, and ordering are provided through the institute conformance twins `Equation.Protocol` / `Hash.Protocol` / `Comparison.Protocol`, comparing the directions lexicographically.
 
 ---
 
@@ -39,8 +48,7 @@ mm < pm                                                   // true
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-atoms/swift-direction.git", branch: "main"),
-    .package(url: "https://github.com/swift-atoms/swift-orthant.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-orthant.git", branch: "main")
 ]
 ```
 
@@ -48,27 +56,30 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Direction", package: "swift-direction"),
         .product(name: "Orthant", package: "swift-orthant"),
     ]
 )
 ```
 
-Requires Swift 6.4 and macOS 27 / iOS 27 / tvOS 27 / watchOS 27 / visionOS 27 (or the matching Linux / Windows toolchain).
+Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 (or the matching Linux / Windows toolchain).
 
 ---
 
 ## Architecture
 
-The native `Orthant` target depends only on the `Direction` atom. Standard-library and Apple-Foundation integration stay in separate targets.
+The `Orthant` root namespace depends only on the `Direction` atom; the conformance twins each add one institute protocol. Import the `Orthant` umbrella for the full surface, or a single sub-target for a narrower dependency.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Orthant` | `Sources/Orthant/` | The Foundation-free value type, construction, opposite, equality, hashing, and ordering. |
-| `Orthant Standard Library Integration` | `Sources/Orthant Standard Library Integration/` | `Codable` integration, compiled out for Swift Embedded. |
-| `Orthant Apple Foundation Integration` | `Sources/Orthant Apple Foundation Integration/` | The Foundation-facing aggregation product. |
+| `Orthant Primitive` | `Sources/Orthant Primitive/` | The `Orthant<N>` value type: per-axis `Direction` storage, `opposite`, the `==` / `<` / `hash(into:)` witnesses, and `Codable`. |
+| `Orthant Equation` | `Sources/Orthant Equation/` | `Equation.Protocol` conformance (the institute `Equatable` twin). |
+| `Orthant Hash` | `Sources/Orthant Hash/` | `Hash.Protocol` conformance (the institute `Hashable` twin). |
+| `Orthant Comparison` | `Sources/Orthant Comparison/` | `Comparison.Protocol` conformance (the institute `Comparable` twin). |
+| `Orthant Enumerable` | `Sources/Orthant Enumerable/` | `Finite.Enumerable` conformance: `count` (`2ᴺ`), `ordinal`, and `allCases`. |
+| `Orthant` | `Sources/Orthant/` | Umbrella re-exporting all of the above. |
+| `Orthant Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
 
-Foundation is imported only by the Apple Foundation Integration target.
+Foundation-free.
 
 ---
 
@@ -76,11 +87,10 @@ Foundation is imported only by the Apple Foundation Integration target.
 
 | Platform | Status |
 |----------|--------|
-| macOS 27 | Full support |
+| macOS 26 | Full support |
 | Linux | Full support |
 | Windows | Full support |
-| iOS 27 / tvOS 27 / watchOS 27 / visionOS 27 | Supported |
-| Swift Embedded | Native core supported; `Codable` is unavailable |
+| iOS / tvOS / watchOS / visionOS | Supported |
 
 ---
 
