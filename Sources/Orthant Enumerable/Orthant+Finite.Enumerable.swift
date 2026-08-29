@@ -1,9 +1,11 @@
-import Direction
-import Finite
-import Ordinal
-import Orthant
+public import Cardinal
+public import Direction
+public import Finite
+public import Finite_Enumerable
+public import Ordinal
+public import Orthant
 
-extension Orthant: Finite.Enumerable {
+extension Orthant: Finite::Finite.Enumerable {
 
     @inlinable
     public static var count: Cardinal { Cardinal(integerLiteral: UInt(1) << UInt(N)) }

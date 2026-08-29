@@ -45,6 +45,10 @@ let package = Package(
             branch: "main"
         ),
         .package(
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
+            branch: "main"
+        ),
+        .package(
             url: "https://github.com/swift-atoms/swift-equation.git",
             branch: "main"
         ),
@@ -78,21 +82,21 @@ let package = Package(
             name: "Orthant Equation",
             dependencies: [
                 .target(name: "Orthant"),
-                .product(name: "Equation", package: "swift-equation"),
+                .product(name: "Equation Protocol", package: "swift-equation"),
             ]
         ),
         .target(
             name: "Orthant Hash",
             dependencies: [
                 .target(name: "Orthant"),
-                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Hash Protocol", package: "swift-hash"),
             ]
         ),
         .target(
             name: "Orthant Comparison",
             dependencies: [
                 .target(name: "Orthant"),
-                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
 
@@ -100,8 +104,10 @@ let package = Package(
             name: "Orthant Enumerable",
             dependencies: [
                 .target(name: "Orthant"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Direction", package: "swift-direction"),
                 .product(name: "Finite", package: "swift-finite"),
+                .product(name: "Finite Enumerable", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
@@ -122,6 +128,10 @@ let package = Package(
             name: "Orthant Tests",
             dependencies: [
                 .target(name: "Orthant"),
+                .target(name: "Orthant Comparison"),
+                .target(name: "Orthant Enumerable"),
+                .target(name: "Orthant Equation"),
+                .target(name: "Orthant Hash"),
                 .target(name: "Orthant Test Support"),
             ]
         ),
