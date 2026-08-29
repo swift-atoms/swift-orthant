@@ -1,4 +1,7 @@
 import Orthant
+import Orthant_Comparison
+import Orthant_Equation
+import Orthant_Hash
 import Testing
 
 @Suite
