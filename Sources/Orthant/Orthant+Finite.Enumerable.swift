@@ -1,9 +1,7 @@
 public import Cardinal
 public import Direction
 public import Finite
-public import Finite_Enumerable
 public import Ordinal
-public import Orthant
 
 extension Orthant: Finite::Finite.Enumerable {
 

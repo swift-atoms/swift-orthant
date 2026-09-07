@@ -11,33 +11,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Orthant Equation",
-            targets: ["Orthant Equation"]
-        ),
-        .library(
-            name: "Orthant Hash",
-            targets: ["Orthant Hash"]
-        ),
-        .library(
-            name: "Orthant Comparison",
-            targets: ["Orthant Comparison"]
-        ),
-        .library(
-            name: "Orthant Enumerable",
-            targets: ["Orthant Enumerable"]
-        ),
-
-        .library(
-            name: "Orthant",
-            targets: ["Orthant"]
-        ),
-
-        .library(
-            name: "Orthant Test Support",
-            targets: ["Orthant Test Support"]
-        ),
+        .library(name: "Orthant", targets: ["Orthant"]),
+        .library(name: "Orthant Standard Library Integration", targets: ["Orthant Standard Library Integration"]),
+        .library(name: "Orthant Foundation Library Integration", targets: ["Orthant Foundation Library Integration"]),
+        .library(name: "Orthant Test Support", targets: ["Orthant Test Support"]),
     ],
     dependencies: [
         .package(
@@ -70,77 +47,58 @@ let package = Package(
         ),
     ],
     targets: [
-
         .target(
             name: "Orthant",
             dependencies: [
-                .product(name: "Direction", package: "swift-direction")
-            ]
-        ),
-
-        .target(
-            name: "Orthant Equation",
-            dependencies: [
-                .target(name: "Orthant"),
-                .product(name: "Equation Protocol", package: "swift-equation"),
-            ]
-        ),
-        .target(
-            name: "Orthant Hash",
-            dependencies: [
-                .target(name: "Orthant"),
-                .product(name: "Hash Protocol", package: "swift-hash"),
-            ]
-        ),
-        .target(
-            name: "Orthant Comparison",
-            dependencies: [
-                .target(name: "Orthant"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-            ]
-        ),
-
-        .target(
-            name: "Orthant Enumerable",
-            dependencies: [
-                .target(name: "Orthant"),
-                .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Direction", package: "swift-direction"),
+                .product(name: "Equation", package: "swift-equation"),
+                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Finite", package: "swift-finite"),
-                .product(name: "Finite Enumerable", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
+            ],
+            path: "Sources/Orthant"
         ),
-
+        .target(
+            name: "Orthant Standard Library Integration",
+            dependencies: [
+                .target(name: "Orthant"),
+            ],
+            path: "Sources/Orthant Standard Library Integration"
+        ),
+        .target(
+            name: "Orthant Foundation Library Integration",
+            dependencies: [
+                .target(name: "Orthant"),
+                .target(name: "Orthant Standard Library Integration"),
+            ],
+            path: "Sources/Orthant Foundation Library Integration"
+        ),
         .target(
             name: "Orthant Test Support",
             dependencies: [
                 .target(name: "Orthant"),
-                .product(
-                    name: "Ordinal Test Support",
-                    package: "swift-ordinal"
-                ),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ],
             path: "Tests/Support"
         ),
-
         .testTarget(
             name: "Orthant Tests",
             dependencies: [
                 .target(name: "Orthant"),
-                .target(name: "Orthant Comparison"),
-                .target(name: "Orthant Enumerable"),
-                .target(name: "Orthant Equation"),
-                .target(name: "Orthant Hash"),
                 .target(name: "Orthant Test Support"),
-            ]
+                .target(name: "Orthant Standard Library Integration"),
+                .target(name: "Orthant Foundation Library Integration"),
+            ],
+            path: "Tests/Orthant Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -149,8 +107,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

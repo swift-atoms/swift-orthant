@@ -1,2 +1,2 @@
-@_exported public import Ordinal_Test_Support
+@_exported public import Ordinal
 internal import Orthant
