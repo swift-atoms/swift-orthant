@@ -12,8 +12,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Orthant", targets: ["Orthant"]),
-        .library(name: "Orthant Standard Library Integration", targets: ["Orthant Standard Library Integration"]),
-        .library(name: "Orthant Foundation Library Integration", targets: ["Orthant Foundation Library Integration"]),
+
+        .library(name: "Orthant Foundation Integration", targets: ["Orthant Foundation Integration"]),
         .library(name: "Orthant Test Support", targets: ["Orthant Test Support"]),
     ],
     dependencies: [
@@ -60,20 +60,13 @@ let package = Package(
             ],
             path: "Sources/Orthant"
         ),
+        
         .target(
-            name: "Orthant Standard Library Integration",
+            name: "Orthant Foundation Integration",
             dependencies: [
                 .target(name: "Orthant"),
             ],
-            path: "Sources/Orthant Standard Library Integration"
-        ),
-        .target(
-            name: "Orthant Foundation Library Integration",
-            dependencies: [
-                .target(name: "Orthant"),
-                .target(name: "Orthant Standard Library Integration"),
-            ],
-            path: "Sources/Orthant Foundation Library Integration"
+            path: "Sources/Orthant Foundation Integration"
         ),
         .target(
             name: "Orthant Test Support",
@@ -88,8 +81,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Orthant"),
                 .target(name: "Orthant Test Support"),
-                .target(name: "Orthant Standard Library Integration"),
-                .target(name: "Orthant Foundation Library Integration"),
+                .target(name: "Orthant Foundation Integration"),
             ],
             path: "Tests/Orthant Tests"
         ),
