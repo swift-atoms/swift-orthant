@@ -2,13 +2,13 @@ import Orthant
 import Testing
 
 @Suite
-struct `Orthant - Construction` {
-    @Suite struct `Unit` {}
-    @Suite struct `Edge Case` {}
-    @Suite struct `Integration` {}
+struct `Orthant construction assigns a direction to every axis` {
+    @Suite struct `Orthants preserve repeated and independently selected directions` {}
+    @Suite struct `No orthant construction boundary cases are defined` {}
+    @Suite struct `No orthant construction integration cases are defined` {}
 }
 
-extension `Orthant - Construction`.Unit {
+extension `Orthant construction assigns a direction to every axis`.`Orthants preserve repeated and independently selected directions` {
     @Test
     func `repeating sets every axis`() {
         let orthant = Orthant<3>(repeating: .positive)
@@ -18,7 +18,7 @@ extension `Orthant - Construction`.Unit {
     }
 
     @Test
-    func `per-axis closure init`() {
+    func `Orthant construction evaluates a direction for each axis`() {
         let orthant = Orthant<3> { index in index == 1 ? .negative : .positive }
         #expect(orthant.directions[0] == .positive)
         #expect(orthant.directions[1] == .negative)
@@ -27,13 +27,13 @@ extension `Orthant - Construction`.Unit {
 }
 
 @Suite
-struct `Orthant - Opposite` {
-    @Suite struct `Unit` {}
-    @Suite struct `Edge Case` {}
-    @Suite struct `Integration` {}
+struct `Orthant opposition reverses every axis direction` {
+    @Suite struct `Opposite orthants invert each stored direction` {}
+    @Suite struct `Applying orthant opposition twice restores the original value` {}
+    @Suite struct `No orthant opposition integration cases are defined` {}
 }
 
-extension `Orthant - Opposite`.Unit {
+extension `Orthant opposition reverses every axis direction`.`Opposite orthants invert each stored direction` {
     @Test
     func `opposite flips every axis`() {
         let orthant = Orthant<3> { index in index == 0 ? .positive : .negative }
@@ -44,7 +44,7 @@ extension `Orthant - Opposite`.Unit {
     }
 }
 
-extension `Orthant - Opposite`.`Edge Case` {
+extension `Orthant opposition reverses every axis direction`.`Applying orthant opposition twice restores the original value` {
     @Test
     func `opposite is involution`() {
         let orthant = Orthant<2> { index in index == 0 ? .positive : .negative }
@@ -53,13 +53,13 @@ extension `Orthant - Opposite`.`Edge Case` {
 }
 
 @Suite
-struct `Orthant - Conformances` {
-    @Suite struct `Unit` {}
-    @Suite struct `Edge Case` {}
-    @Suite struct `Integration` {}
+struct `Orthant equality and hashing distinguish direction combinations` {
+    @Suite struct `Orthant equality and hashing preserve every axis direction` {}
+    @Suite struct `No orthant equality and hashing boundary cases are defined` {}
+    @Suite struct `No orthant equality and hashing integration cases are defined` {}
 }
 
-extension `Orthant - Conformances`.Unit {
+extension `Orthant equality and hashing distinguish direction combinations`.`Orthant equality and hashing preserve every axis direction` {
     @Test
     func `Equatable is element-wise`() {
         #expect(Orthant<2>(repeating: .positive) == Orthant<2>(repeating: .positive))
@@ -84,15 +84,15 @@ extension `Orthant - Conformances`.Unit {
 }
 
 @Suite
-struct `Orthant - Comparison` {
-    @Suite struct `Unit` {}
-    @Suite struct `Edge Case` {}
-    @Suite struct `Integration` {}
+struct `Orthant ordering compares directions lexicographically` {
+    @Suite struct `Orthant comparison gives the first axis greatest significance` {}
+    @Suite struct `No orthant comparison boundary cases are defined` {}
+    @Suite struct `No orthant comparison integration cases are defined` {}
 }
 
-extension `Orthant - Comparison`.Unit {
+extension `Orthant ordering compares directions lexicographically`.`Orthant comparison gives the first axis greatest significance` {
     @Test
-    func `lexicographic order, axis 0 most significant`() {
+    func `Orthant lexicographic ordering gives axis zero highest priority`() {
         let mm = Orthant<2>(repeating: .negative)
         let mp = Orthant<2> { $0 == 0 ? .negative : .positive }
         let pm = Orthant<2> { $0 == 0 ? .positive : .negative }
