@@ -4,7 +4,7 @@ import Testing
 
 @Suite struct `Decoding preserves the orthant dimension` {
     @Test func `Every three dimensional orthant round trips`() throws {
-        for orthant in Orthant<3>.allCases {
+        for orthant in try Orthant<3>.allCases {
             let data = try JSONEncoder().encode(orthant)
             #expect(try JSONDecoder().decode(Orthant<3>.self, from: data) == orthant)
         }
@@ -36,11 +36,11 @@ import Testing
         }
     }
 
-    @Test func `Zero dimensions contain one self opposite orthant`() {
+    @Test func `Zero dimensions contain one self opposite orthant`() throws {
         let empty = Orthant<0>(repeating: .positive)
-        #expect(Orthant<0>.count == 1)
-        #expect(empty.ordinal == 0)
-        #expect(Array(Orthant<0>.allCases) == [empty])
+        #expect(try Orthant<0>.count == 1)
+        #expect(try empty.ordinal == 0)
+        #expect(try Array(Orthant<0>.allCases) == [empty])
         #expect(empty.opposite == empty)
     }
 }

@@ -38,10 +38,6 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-finite.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
@@ -55,7 +51,6 @@ let package = Package(
                 .product(name: "Hash", package: "swift-hash"),
                 .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Finite", package: "swift-finite"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
             path: "Sources/Orthant"

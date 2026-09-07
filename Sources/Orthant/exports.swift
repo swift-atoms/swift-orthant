@@ -2,6 +2,5 @@
 @_exported public import Comparison
 @_exported public import Direction
 @_exported public import Equation
-@_exported public import Finite
 @_exported public import Hash
 @_exported public import Ordinal
