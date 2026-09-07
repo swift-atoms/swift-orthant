@@ -3,9 +3,9 @@ import Testing
 
 @Suite
 struct `Orthant - Construction` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant - Construction`.Unit {
@@ -28,9 +28,9 @@ extension `Orthant - Construction`.Unit {
 
 @Suite
 struct `Orthant - Opposite` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant - Opposite`.Unit {
@@ -54,9 +54,9 @@ extension `Orthant - Opposite`.`Edge Case` {
 
 @Suite
 struct `Orthant - Conformances` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant - Conformances`.Unit {
@@ -85,9 +85,9 @@ extension `Orthant - Conformances`.Unit {
 
 @Suite
 struct `Orthant - Comparison` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant - Comparison`.Unit {

@@ -4,9 +4,9 @@ import Testing
 
 @Suite
 struct `Orthant+Finite.Enumerable - Enumerable` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant+Finite.Enumerable - Enumerable`.Unit {
@@ -29,9 +29,9 @@ extension `Orthant+Finite.Enumerable - Enumerable`.Unit {
 
 @Suite
 struct `Orthant+Finite.Enumerable - AllCases` {
-    @Suite struct Unit {}
+    @Suite struct `Unit` {}
     @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+    @Suite struct `Integration` {}
 }
 
 extension `Orthant+Finite.Enumerable - AllCases`.Unit {
