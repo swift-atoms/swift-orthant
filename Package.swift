@@ -17,6 +17,7 @@ let package = Package(
         .library(name: "Orthant Test Support", targets: ["Orthant Test Support"]),
     ],
     dependencies: [
+
         .package(
             url: "https://github.com/swift-atoms/swift-direction.git",
             branch: "main"
@@ -79,6 +80,34 @@ let package = Package(
                 .target(name: "Orthant Foundation Integration"),
             ],
             path: "Tests/Orthant Tests"
+        ),
+        .testTarget(
+            name: "Consolidated Orthant Comparison Tests",
+            dependencies: [
+
+                .target(name: "Orthant"),
+                .product(name: "Comparison", package: "swift-comparison"),
+            ],
+            path: "Tests/Consolidated swift-orthant-comparison"
+        ),
+        .testTarget(
+            name: "Consolidated Orthant Equation Tests",
+            dependencies: [
+
+                .target(name: "Orthant"),
+                .product(name: "Equation", package: "swift-equation"),
+            ],
+            path: "Tests/Consolidated swift-orthant-equation"
+        ),
+        .testTarget(
+            name: "Consolidated Orthant Hash Tests",
+            dependencies: [
+
+                .target(name: "Orthant"),
+                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Direction", package: "swift-direction"),
+            ],
+            path: "Tests/Consolidated swift-orthant-hash"
         ),
     ],
     swiftLanguageModes: [.v6]
