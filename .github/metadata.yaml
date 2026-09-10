@@ -1,4 +1,3 @@
-# .github/metadata.yaml
 description: "Generalized orthants for Swift — a per-axis direction vector naming the 2^N quadrants and octants of N-space."
 topics:
   - primitives
