@@ -27,18 +27,6 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-equation.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-hash.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-comparison.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
@@ -48,9 +36,6 @@ let package = Package(
             name: "Orthant",
             dependencies: [
                 .product(name: "Direction", package: "swift-direction"),
-                .product(name: "Equation", package: "swift-equation"),
-                .product(name: "Hash", package: "swift-hash"),
-                .product(name: "Comparison", package: "swift-comparison"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
@@ -80,34 +65,6 @@ let package = Package(
                 .target(name: "Orthant Foundation Integration"),
             ],
             path: "Tests/Orthant Tests"
-        ),
-        .testTarget(
-            name: "Consolidated Orthant Comparison Tests",
-            dependencies: [
-
-                .target(name: "Orthant"),
-                .product(name: "Comparison", package: "swift-comparison"),
-            ],
-            path: "Tests/Consolidated swift-orthant-comparison"
-        ),
-        .testTarget(
-            name: "Consolidated Orthant Equation Tests",
-            dependencies: [
-
-                .target(name: "Orthant"),
-                .product(name: "Equation", package: "swift-equation"),
-            ],
-            path: "Tests/Consolidated swift-orthant-equation"
-        ),
-        .testTarget(
-            name: "Consolidated Orthant Hash Tests",
-            dependencies: [
-
-                .target(name: "Orthant"),
-                .product(name: "Hash", package: "swift-hash"),
-                .product(name: "Direction", package: "swift-direction"),
-            ],
-            path: "Tests/Consolidated swift-orthant-hash"
         ),
     ],
     swiftLanguageModes: [.v6]
