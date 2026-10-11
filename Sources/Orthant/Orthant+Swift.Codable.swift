@@ -1,7 +1,7 @@
 import Direction
 
 #if !hasFeature(Embedded)
-extension Orthant: Swift.Codable {
+extension Orthant: Swift::Codable {
     @inlinable
     public init(from decoder: any Decoder) throws {
         var container = try decoder.unkeyedContainer()

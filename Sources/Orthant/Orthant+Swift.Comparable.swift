@@ -1,1 +1,1 @@
-extension Orthant: Swift.Comparable {}
+extension Orthant: Swift::Comparable {}

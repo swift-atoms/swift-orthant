@@ -1,1 +1,1 @@
-extension Orthant: Swift.Equatable {}
+extension Orthant: Swift::Equatable {}

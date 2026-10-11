@@ -1,1 +1,1 @@
-extension Orthant: Swift.Hashable {}
+extension Orthant: Swift::Hashable {}

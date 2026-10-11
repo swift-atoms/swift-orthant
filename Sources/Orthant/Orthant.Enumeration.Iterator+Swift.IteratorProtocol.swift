@@ -1,6 +1,6 @@
 public import Ordinal
 
-extension Orthant.Enumeration.Iterator: Swift.IteratorProtocol {
+extension Orthant.Enumeration.Iterator: Swift::IteratorProtocol {
     @inlinable
     public mutating func next() -> Orthant<N>? {
         guard current < end else { return nil }

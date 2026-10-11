@@ -22,12 +22,6 @@ extension Orthant {
                 self.end = end
             }
         }
-
-        @inlinable
-        public func element(at ordinal: Ordinal) -> Orthant? {
-            guard ordinal.rawValue < count.rawValue else { return nil }
-            return Orthant(_ordinal: ordinal)
-        }
     }
 
     @inlinable
@@ -35,5 +29,14 @@ extension Orthant {
         get throws(Error) {
             Enumeration(count: try count)
         }
+    }
+}
+
+extension Orthant.Enumeration {
+
+    @inlinable
+    public func element(at ordinal: Ordinal) -> Orthant? {
+        guard ordinal.rawValue < count.rawValue else { return nil }
+        return Orthant(_ordinal: ordinal)
     }
 }
