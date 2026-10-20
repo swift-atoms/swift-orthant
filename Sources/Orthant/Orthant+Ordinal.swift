@@ -36,8 +36,10 @@ extension Orthant {
     @usableFromInline
     init(_ordinal: Ordinal) {
         let bits = _ordinal.rawValue
-        self.init(InlineArray<N, Direction> { index in
-            index < UInt.bitWidth && bits & (UInt(1) << index) != 0 ? .negative : .positive
-        })
+        self.init(
+            InlineArray<N, Direction> { index in
+                index < UInt.bitWidth && bits & (UInt(1) << index) != 0 ? .negative : .positive
+            }
+        )
     }
 }

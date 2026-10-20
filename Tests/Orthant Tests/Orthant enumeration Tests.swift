@@ -61,9 +61,9 @@ import Testing
 
     @Test func `The last representable enumeration remains lazy and exact`() throws {
         #if arch(arm64) || arch(x86_64)
-        typealias Boundary = Orthant<63>
+            typealias Boundary = Orthant<63>
         #else
-        typealias Boundary = Orthant<31>
+            typealias Boundary = Orthant<31>
         #endif
         let cases = try Boundary.allCases
         #expect(cases.count.rawValue == UInt.max / 2 + 1)
@@ -77,9 +77,9 @@ import Testing
 
     @Test func `A full word ordinal fits even when the enumeration count does not`() throws {
         #if arch(arm64) || arch(x86_64)
-        typealias FullWord = Orthant<64>
+            typealias FullWord = Orthant<64>
         #else
-        typealias FullWord = Orthant<32>
+            typealias FullWord = Orthant<32>
         #endif
         #expect(throws: FullWord.Error.countOverflow) { try FullWord.count }
         #expect(throws: FullWord.Error.countOverflow) { try FullWord.allCases }
